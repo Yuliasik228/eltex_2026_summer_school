@@ -1,0 +1,209 @@
+export MYUSER="eltex-v6"
+ssh-keygen
+ssh-copy-id root@172.16.9.180
+cat ~/.ssh/*.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCcnAM8mV6RZRCbyD40FAnM9AlbOq6nYwRtDSkQX1YJl7pQ5pdn5gPLfbWPwOO4HGYZh45aQPQbGrY/FSH2YQWLIOSvDoUeQyw/yOP4BAJNgDsZFV7JRP7bXztcdsH64YnvcxYSLhAzfquwdE4lDtKilWC9EH33Jkaj46lh/IM6WjK10sUyAWhVm64tWAUNNhjgOrY6RvGOwOJLju+jTez2i6xUvNFp7Zp7CRFdmSMU9/YW3apIRBu2EVX5ej53xv0QXlvg6HwnCRArIO2j6+HzUizn993USxA9PCSdOBHhUQ+HEclDaWcbphi9I48raiEBdXI3WeH+GUZ6eJ3rmS9UplzjFJKbkP8mZUAsVz/fWST28egt/HeOaqpZKSU2i4//b8eUZbKQ/qjBfTpnhhei4nWfiAeWUvfUZbHC20tmD/R/NabVIU9B3o41xKKcMFeTxnUqTxmO7eiS9CjjRmfjGz21E6EQxWvnlg7Io8CNMyw15O1SaoetpLsb2rbIpS8= eltex-v6@eltex-2026-summer
+ls -l ~/.ssh/*.pub
+-rw-r--r-- 1 eltex-v6 eltex-v6 580 июл  8 11:27 /home/eltex-v6/.ssh/id_rsa.pub
+scp practice2_${MYUSER}_part1.log root@172.16.9.180:/root/
+ssh root@172.16.9.180
+export MYUSER="eltex-v6"
+cat ~/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCcnAM8mV6RZRCbyD40FAnM9AlbOq6nYwRtDSkQX1YJl7pQ5pdn5gPLfbWPwOO4HGYZh45aQPQbGrY/FSH2YQWLIOSvDoUeQyw/yOP4BAJNgDsZFV7JRP7bXztcdsH64YnvcxYSLhAzfquwdE4lDtKilWC9EH33Jkaj46lh/IM6WjK10sUyAWhVm64tWAUNNhjgOrY6RvGOwOJLju+jTez2i6xUvNFp7Zp7CRFdmSMU9/YW3apIRBu2EVX5ej53xv0QXlvg6HwnCRArIO2j6+HzUizn993USxA9PCSdOBHhUQ+HEclDaWcbphi9I48raiEBdXI3WeH+GUZ6eJ3rmS9UplzjFJKbkP8mZUAsVz/fWST28egt/HeOaqpZKSU2i4//b8eUZbKQ/qjBfTpnhhei4nWfiAeWUvfUZbHC20tmD/R/NabVIU9B3o41xKKcMFeTxnUqTxmO7eiS9CjjRmfjGz21E6EQxWvnlg7Io8CNMyw15O1SaoetpLsb2rbIpS8= eltex-v6@eltex-2026-summer
+ls -l ~/.ssh/authorized_keys
+-rw------- 1 root root 580 Jul  8 04:31 /root/.ssh/authorized_keys
+useradd -m -s /bin/bash user1
+passwd user1
+New password:
+Retype new password:
+passwd: password updated successfully
+adduser user2
+info: Adding user `user2' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `user2' (1002) ...
+info: Adding new user `user2' (1002) with group `user2 (1002)' ...
+info: Creating home directory `/home/user2' ...
+info: Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for user2
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] Y
+info: Adding new user `user2' to supplemental / extra groups `users' ...
+info: Adding user `user2' to group `users' ...
+adduser user3
+info: Adding user `user3' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `user3' (1003) ...
+info: Adding new user `user3' (1003) with group `user3 (1003)' ...
+info: Creating home directory `/home/user3' ...
+info: Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for user3
+Enter the new value, or press ENTER for the default
+        Full Name []:
+        Room Number []:
+        Work Phone []:
+        Home Phone []:
+        Other []:
+Is the information correct? [Y/n] Y
+info: Adding new user `user3' to supplemental / extra groups `users' ...
+info: Adding user `user3' to group `users' ...
+usermod -s /usr/sbin/nologin user3
+su user3
+This account is currently not available.
+su -s /bin/bash user3
+user3@eltex-practice2-v6:/root$ whoami
+user3
+user3@eltex-practice2-v6:/root$ logout
+bash: logout: not login shell: use `exit'
+user3@eltex-practice2-v6:/root$ exit
+exit
+groupadd usergroup
+usermod -aG usergroup user1
+usermod -aG usergroup user2
+usermod -aG usergroup user3
+groups user1
+user1 : user1 usergroup
+groups user2
+user2 : user2 users usergroup
+groups user3
+user3 : user3 users usergroup
+mkdir /opt/share
+chown :usergroup /opt/share
+chmod g+s /opt/share
+chmod g+r+w+x /opt/share
+echo "umask 004" >> /home/user1/.profile
+su - user1
+touch /opt/share/file1.txt
+exit
+su user2
+touch /opt/share/file2.txt
+exit
+su -s /bin/bash user3
+touch /opt/share/file3.txt
+rm /opt/share/file1.txt
+exit
+su user1
+rm /opt/share/file2.txt
+exit
+su user2
+rm /opt/share/file3.txt
+exit
+chmod +t /opt/share
+su - user1
+touch /opt/share/file1.txt
+exit
+su user2
+touch /opt/share/file2.txt
+exit
+su -s /bin/bash user3
+touch /opt/share/file3.txt
+rm /opt/share/file1.txt
+rm: cannot remove '/opt/share/file1.txt': Operation not permitted
+exit
+su user1
+rm /opt/share/file2.txt
+rm: cannot remove '/opt/share/file2.txt': Operation not permitted
+exit
+su user2
+rm /opt/share/file3.txt
+rm: cannot remove '/opt/share/file3.txt': Operation not permitted
+exit
+echo "user1 ALL=(ALL) NOPASSWD: /usr/bin/dmesg" > /etc/sudoers.d/user1-dmesg
+nano /usr/local/bin/user2-dmesg.sh
+#!/bin/bash
+/usr/bin/dmesg
+chmod +x /usr/local/bin/user2-dmesg.sh
+chmod u+s /usr/local/bin/user2-dmesg.sh
+ls -l /usr/local/bin/user2-dmesg.sh
+-rwsr-xr-x 1 root root 27 Jul 17 04:26 /usr/local/bin/user2-dmesg.sh
+chage -M 10 user1
+chage -M 10 user2
+chage -M 10 user3
+nano /etc/motd
+Юлия Васильева
+rsync -a /etc/ /root/etc_backup/
+tar -czf /root/etc_backup.tar.gz  etc_backup
+apt install bzip2 –y
+tar -cjf /root/etc_backup.tar.bz2 etc_backup
+apt install p7zip-full -y
+tar -cf /root/etc_backup.tar etc_backup
+7z a /root/etc_backup.tar.7z /root/etc_backup.tar
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:2 OPEN_MAX:1024
+
+Scanning the drive:
+1 file, 3420160 bytes (3340 KiB)
+
+Creating archive: /root/etc_backup.tar.7z
+
+Add new data to archive: 1 file, 3420160 bytes (3340 KiB)
+
+
+Files read from disk: 1
+Archive size: 466113 bytes (456 KiB)
+Everything is Ok
+ls -lh
+total 4.8M
+drwxr-xr-x 109 root root 4.0K Jul 19 09:36 etc_backup
+-rw-r--r--   1 root root 3.3M Jul 19 09:39 etc_backup.tar
+-rw-r--r--   1 root root 456K Jul 19 09:39 etc_backup.tar.7z
+-rw-r--r--   1 root root 527K Jul 19 09:39 etc_backup.tar.bz2
+-rw-r--r--   1 root root 564K Jul 19 09:39 etc_backup.tar.gz
+-rw-r--r--   1 root root 4.5K Jul 19 09:36 practice2_eltex-v6_part1.log
+rm /root/etc_backup.tar
+date >> /etc/motd
+rsync -a /etc/ /root/etc_backup/
+gunzip /root/etc_backup.tar.gz
+tar -rf /root/etc_backup.tar /root/etc_backup/motd
+gzip /root/etc_backup.tar
+tar -tjf /root/etc_backup.tar.bz2 | sed 's|/$||' | sort > /root/archive.txt
+find etc_backup | sort > /root/backup.txt
+diff /root/archive.txt /root/backup.txt
+mkdir -p /root/etc_backup_gzip /root/etc_backup_7zip
+tar -xzf /root/etc_backup.tar.gz -C /root/etc_backup_gzip
+7z x /root/etc_backup.tar.7z -o/root/etc_backup_7zip
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=en_US.UTF-8 Threads:2 OPEN_MAX:1024
+
+Scanning the drive for archives:
+1 file, 466113 bytes (456 KiB)
+
+Extracting archive: /root/etc_backup.tar.7z
+--
+Path = /root/etc_backup.tar.7z
+Type = 7z
+Physical Size = 466113
+Headers Size = 138
+Method = LZMA2:22
+Solid = -
+Blocks = 1
+
+Everything is Ok
+
+Size:       3420160
+Compressed: 466113
+tar -xf /root/etc_backup_7zip/etc_backup.tar -C /root/etc_backup_7zip
+rm /root/etc_backup_7zip/etc_backup.tar
+find /root/etc_backup_gzip -name motd
+/root/etc_backup_gzip/etc_backup/motd
+/root/etc_backup_gzip/root/etc_backup/motd
+find /root/etc_backup_7zip -name motd
+/root/etc_backup_7zip/etc_backup/motd
+diff /root/etc_backup_gzip/etc_backup/motd /root/etc_backup_7zip/etc_backup/motd
+diff /root/etc_backup_gzip/root/etc_backup/motd /root/etc_backup_7zip/etc_backup/motd
+2c2
+< Sun Jul 19 09:49:18 AM UTC 2026
+---
+> 
