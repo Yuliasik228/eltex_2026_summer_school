@@ -1,0 +1,24 @@
+screen -S 'whoami'_part2
+ls + дважды нажали tab
+$HIST + дважды нажали tab
+echo $HISTFILESIZE
+ls -a ~ | grep "^\."
+export HISTTIMEFORMAT="%F %T "
+date
+history | tail -3
+tail -3 ~/.bash_history
+PROMPT_COMMAND="history -a"
+date
+history | tail -3
+tail -3 ~/.bash_history
+DATE=$(date +%Y-%m-%d)
+echo $DATE
+TIME=$(date +%H:%M:%S)
+echo $TIME
+DATE_TIME="$DATE $TIME"
+echo $DATE_TIME
+ls /bin /sbin | grep "[0-9]"
+PS1="\$USER@\$HOSTNAME-\$(date +%H:%M)> "
+export PS1
+bash --norc
+for i in {01..12}; do mkdir ~/$(date +%Y)-$i; done
