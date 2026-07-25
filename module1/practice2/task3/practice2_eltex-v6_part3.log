@@ -161,3 +161,28 @@ Fast-forward
  rename module1/{ => practice1}/task2/eltex-v6_part2.log (100%)
  rename module1/{ => practice1}/task3/eltex-v6_part3.log (100%)
  rename module1/{ => practice1}/task3/eltex-v6_part3_gt20M.log (100%)
+cd ~/eltex_2026_summer_school
+mkdir -p module1/practice2/task1
+mkdir module1/practice2/task2
+mkdir module1/practice2/task3
+cp /root/practice2_${MYUSER}_part1.log module1/practice2/task1/
+cp /root/practice2_${MYUSER}_part2.log module1/practice2/task2/
+cp /root/practice2_${MYUSER}_part3.log module1/practice2/task3/
+git add .
+git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   module1/practice2/task1/practice2_eltex-v6_part1.log
+	new file:   module1/practice2/task2/practice2_eltex-v6_part2.log
+	new file:   module1/practice2/task3/practice2_eltex-v6_part3.log
+
+git commit -m " Отчеты по практике 2"
+[main 7b1f27f]  Отчеты по практике 2
+ 3 files changed, 1471 insertions(+)
+ create mode 100644 module1/practice2/task1/practice2_eltex-v6_part1.log
+ create mode 100644 module1/practice2/task2/practice2_eltex-v6_part2.log
+ create mode 100644 module1/practice2/task3/practice2_eltex-v6_part3.log
+git push
